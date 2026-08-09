@@ -2,10 +2,12 @@ import { Component, inject } from '@angular/core';
 import { Products } from '../../shared/services/products.service';
 import { Product } from '../../shared/interfaces/product.interface';
 import { Card } from './components/card/card';
+import { RouterLink } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-list',
-  imports: [Card],
+  imports: [Card, RouterLink, MatButtonModule],
   templateUrl: './list.html',
   styleUrl: './list.scss',
 })
