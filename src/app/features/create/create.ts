@@ -18,8 +18,6 @@ export class Create {
   });
 
   onSubmit() {
-    if (this.form.controls.title.valid) {
-      console.log(this.form.value);
-    }
+    this.form.controls.title.value;
   }
 }
