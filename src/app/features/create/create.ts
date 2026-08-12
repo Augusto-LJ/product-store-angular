@@ -35,11 +35,7 @@ export class Create {
       description: this.form.controls.description.value,
     })
     .subscribe(() => {
-      this.matSnackbar.open('Produto criado com sucesso!', 'Fechar', {
-        duration: 3000,
-        horizontalPosition: 'right',
-        verticalPosition: 'top'
-      });
+      this.matSnackbar.open('Produto criado com sucesso!', 'Fechar');
 
       this.router.navigateByUrl('/');
     });
