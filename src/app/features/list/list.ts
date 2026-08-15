@@ -5,6 +5,7 @@ import { Card } from './components/card/card';
 import { Router, RouterLink } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-confirmation-dialog',
@@ -61,8 +62,11 @@ export class List {
   onDelete(id: string) {
     this.matDialog.open(ConfirmationDialog)
       .afterClosed()
-      .subscribe((answer: boolean) => {
-        console.log(answer);
+      .pipe(filter((answer: boolean) => answer === true))
+      .subscribe(() => {
+        this.productsService.delete(id).subscribe(() => {
+          this.products = this.products.filter((p) => p.id !== id);
+        });
       });
   }
 }
