@@ -4,35 +4,8 @@ import { Product } from '../../shared/interfaces/product.interface';
 import { Card } from './components/card/card';
 import { Router, RouterLink } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { filter } from 'rxjs';
-
-@Component({
-  selector: 'app-confirmation-dialog',
-  template: `
-    <h2 mat-dialog-title>Deletar produto</h2>
-    <mat-dialog-content>
-      Deseja realmente deletar o produto?
-    </mat-dialog-content>
-    <mat-dialog-actions align="end">
-      <button matButton (click)="onYes()" cdkFocusInitial color="primary">Sim</button>
-      <button matButton (click)="onNo()" color="warn">Não</button>
-    </mat-dialog-actions>
-  `,
-  imports: [MatButtonModule, MatDialogModule],
-})
-
-export class ConfirmationDialog {
-  matDialogRef = inject(MatDialogRef<ConfirmationDialog>);
-
-  onNo() {
-    this.matDialogRef.close(false);
-  };
-
-  onYes() {
-    this.matDialogRef.close(true);
-  };
-}
+import { ConfirmationDialogService } from '../../shared/services/confirmation-dialog';
 
 @Component({
   selector: 'app-list',
@@ -47,7 +20,7 @@ export class List {
 
   productsService = inject(Products);
   router = inject(Router);
-  matDialog = inject(MatDialog);
+  confirmationDialogService = inject(ConfirmationDialogService);
 
   ngOnInit() {
     this.productsService.getAll().subscribe((products) => {
@@ -60,13 +33,13 @@ export class List {
   };
 
   onDelete(id: string) {
-    this.matDialog.open(ConfirmationDialog)
-      .afterClosed()
-      .pipe(filter((answer: boolean) => answer === true))
-      .subscribe(() => {
-        this.productsService.delete(id).subscribe(() => {
-          this.products = this.products.filter((p) => p.id !== id);
-        });
+   this.confirmationDialogService
+    .openDialog()
+    .pipe(filter((answer: boolean) => answer === true))
+    .subscribe(() => {
+      this.productsService.delete(id).subscribe(() => {
+        this.products = this.products.filter((p) => p.id !== id);
       });
+    });
   }
 }
