@@ -1,20 +1,4 @@
 {
-  "products": [
-    {
-      "title": "Produto 1 editado",
-      "description": "Descrição do Produto editado",
-      "id": "1"
-    },
-    {
-      "id": "2",
-      "title": "Produto 2",
-      "description": "Descrição do Produto 2"
-    },
-    {
-      "id": "3",
-      "title": "Produto 3",
-      "description": "Descrição do Produto 3"
-    }
-  ],
+  "products": [],
   "$schema": "./node_modules/json-server/schema.json"
 }
