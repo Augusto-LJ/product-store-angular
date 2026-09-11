@@ -3,9 +3,11 @@
 </div>
 
 @for (product of products(); track product.id) {
-    @defer (on immediate) {
-        <app-card [product]="product" (edit)="onEdit(product.id)" (delete)="onDelete(product.id)"></app-card>
-    }
+    <div class="item-container">
+        @defer (on immediate) {
+            <app-card [product]="product" (edit)="onEdit(product.id)" (delete)="onDelete(product.id)"></app-card>
+        }
+    </div>
 }
 @empty {
     @defer (on immediate) {
