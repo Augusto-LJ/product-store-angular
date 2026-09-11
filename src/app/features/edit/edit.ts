@@ -4,10 +4,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Products } from '../../shared/services/products.service';
 import { Product } from '../../shared/interfaces/product.interface';
 import { Form } from '../../shared/components/form/form';
+import { BackToList } from '../../shared/components/back-to-list/back-to-list';
 
 @Component({
   selector: 'app-edit',
-  imports: [Form],
+  imports: [Form, BackToList],
   templateUrl: './edit.html',
   styleUrl: './edit.scss',
 })
